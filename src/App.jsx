@@ -1,41 +1,49 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { UserContext } from './context/userContext';
+import { UsersContext } from './context/usersContext';
 
 
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
-import PublicLayout from './layouts/PublicLayout';
+import Layout from './layouts/Layout';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import { useState } from 'react';
-import PrivateLayout from './layouts/PrivateLayout';
+
 import Catalogo from './pages/Catalogo';
 
 function App() {
-  const [user, setUser] = useState({
+	const [users, setUsers] = useState([]);
+
+	const [user, setUser] = useState({
 		name: '',
 		email: '',
 		password: '',
+		isActive: false,
+		productsSelected: [],
 	});
 
 	return (
 		<>
-			<UserContext.Provider value={{ user, setUser }}>
-				<Router>
-					<Routes>
-						<Route path="/" element={<PublicLayout />}>
-							<Route index element={<Home />} />
-							<Route path="login" element={<Login />} />
-							<Route path="register" element={<Register />} />
-							<Route path="*" element={<NotFound />} />
-						</Route>
-						<Route path="/dentales" element={<PrivateLayout />}>
-							<Route path="catalogo" element={<Catalogo />} />
-						</Route>
-					</Routes>
-				</Router>
-			</UserContext.Provider>
+			<UsersContext.Provider value={{ users, setUsers }}>
+				<UserContext.Provider value={{ user, setUser }}>
+					<Router>
+						<Routes>
+							<Route path="/" element={<Layout />}>
+								<Route index element={<Home />} />
+								<Route path="login" element={<Login />} />
+								<Route path="register" element={<Register />} />
+								
+								<Route path="catalogo" element={<Catalogo />} />
+								
+
+								<Route path="*" element={<NotFound />} />
+							</Route>
+						</Routes>
+					</Router>
+				</UserContext.Provider>
+			</UsersContext.Provider>
 		</>
 	);
 }
