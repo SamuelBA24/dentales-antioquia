@@ -60,9 +60,13 @@ const Carrito = () => {
 	const total = () => {
 		let total = 0;
 		user.productsSelected.forEach((product) => {
+			if(product.salePrice){
+				total += product.salePrice * product.quantity;
+				return
+			}
 			total += product.price * product.quantity;
 		});
-		return total;
+		return total.toFixed(3);
 	};
 
 	return (
