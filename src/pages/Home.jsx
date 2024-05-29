@@ -61,7 +61,7 @@ const Home = () => {
 	return (
 		<main>
 			<section className="h-56 sm:h-64 xl:h-80 2xl:max-h-96  mx-auto md:max-w-4xl">
-				<Carousel slide={false}>
+				<Carousel >
 					{carrouselInfo.map(({ imgSrc, alt, link, text }, index) => (
 						<section
 							className="relative flex justify-center items-center"
