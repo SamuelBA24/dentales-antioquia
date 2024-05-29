@@ -12,6 +12,8 @@ import Register from './pages/Register';
 import { useState } from 'react';
 
 import Catalogo from './pages/Catalogo';
+import Contacto from './pages/Contacto';
+import Carrito from './pages/Carrito';
 
 function App() {
 	const [users, setUsers] = useState([]);
@@ -34,9 +36,9 @@ function App() {
 								<Route index element={<Home />} />
 								<Route path="login" element={<Login />} />
 								<Route path="register" element={<Register />} />
-								
+								<Route path="contacto" element={<Contacto />} />
 								<Route path="catalogo" element={<Catalogo />} />
-								
+								<Route path="carrito" element={<Carrito />} />
 
 								<Route path="*" element={<NotFound />} />
 							</Route>

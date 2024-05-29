@@ -1,4 +1,34 @@
+import { useUserContext } from '../context/userContext';
+
 const Product = ({ name, image, price, salePrice, link }) => {
+	const { user, setUser } = useUserContext();
+
+	const handleAddToCart = () => {
+		const productsSelected = Array.isArray(user.productsSelected)
+			? user.productsSelected
+			: [];
+		const updatedUser = {
+			...user,
+			productsSelected: [
+				...productsSelected,
+				{ name, image, price, salePrice, link, quantity: 1 },
+			],
+		};
+		setUser(updatedUser);
+		localStorage.setItem('user', JSON.stringify(updatedUser));
+	};
+
+	const handleRemoveFromCart = (name) => {
+		const updatedProductsSelected = user.productsSelected.filter(
+			(product) => product.name !== name
+		);
+		const updatedUser = {
+			...user,
+			productsSelected: updatedProductsSelected,
+		};
+		setUser(updatedUser);
+		localStorage.setItem('user', JSON.stringify(updatedUser));
+	};
 	return (
 		<article className="max-w-56 h-auto border border-gray-300 hover:border-gray-400 p-5 rounded-md bg-white flex flex-col justify-center transition-all duration-150 ease-in-out gap-3">
 			<img src={image} alt={name} />
@@ -12,12 +42,23 @@ const Product = ({ name, image, price, salePrice, link }) => {
 				{salePrice && <span>${salePrice}</span>}
 			</p>
 
-			<button
-				href={link}
-				className="font-medium border border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white  p-2 rounded-md text-center transition-all duration-150 ease-in-out"
-			>
-				Ver mas
-			</button>
+			{user.isActive &&
+				(user.productsSelected &&
+				user.productsSelected.find((product) => product.name === name) ? (
+					<button
+						className="bg-gray-500 text-white font-bold py-2 rounded-md"
+						onClick={() => handleRemoveFromCart(name)}
+					>
+						Producto en el carrito
+					</button>
+				) : (
+					<button
+						className="bg-blue-500 text-white font-bold py-2 rounded-md"
+						onClick={handleAddToCart}
+					>
+						Agregar al carrito
+					</button>
+				))}
 		</article>
 	);
 };
