@@ -1,10 +1,77 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PasswordInput from '../components/PasswordInput';
+import { useUsersContext } from '../context/usersContext';
+import { useUserContext } from '../context/userContext';
+import { useEffect } from 'react';
 
 const Register = () => {
-	const handleSubmit = (e) => {
+	const { users, setUsers } = useUsersContext();
+	const { user, setUser } = useUserContext();
+	const navigate = useNavigate();
+	
+	const handleSubmit = async (e) => {
 		e.preventDefault();
+
+		const { name, email, password } = e.target.elements;
+
+		console.log(name.value, email.value, password.value);
+
+		if (!name.value) {
+			alert('Ingresa un nombre');
+			return;
+		}
+
+		if (!email.value) {
+			alert('Ingresa un correo electrónico');
+			return;
+		}
+
+		if (password.value.length < 8) {
+			alert('La contraseña debe tener al menos 8 caracteres');
+			return;
+		}
+		if (!password.value) {
+			alert('Ingresa una contraseña');
+			return;
+		}
+
+		if (users.find((user) => user.email === email.value)) {
+			alert('El correo electrónico ya está registrado');
+			return;
+		}
+
+		// Se logró agregar el usuario
+		setUsers([
+			...users,
+			{
+				name: name.value,
+				email: email.value,
+				password: password.value,
+			},
+		]);
+
+		setUser({
+			name: name.value,
+			email: email.value,
+			password: password.value,
+			isActive: true,
+		});
+
+		const usersJson = JSON.stringify(users);
+		localStorage.setItem('users', usersJson);
+
+		const userJson = JSON.stringify(user);
+		localStorage.setItem('user', userJson);
+		alert('Usuario agregado exitosamente');
+
+		return navigate('/catalogo');
 	};
+
+	useEffect(() => {
+		if (user.isActive) {
+			navigate('/catalogo');
+		}
+	}, []);
 
 	return (
 		<main className="min-h-screen flex flex-col items-center">

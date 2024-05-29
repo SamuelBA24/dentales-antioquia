@@ -10,6 +10,8 @@ const PasswordInput = () => {
 	return (
 		<div className="relative w-64">
 			<input
+				id='password'
+				name='password'
 				type={passwordVisible ? 'text' : 'password'}
 				className="w-full p-2 border border-gray-300 rounded"
 				placeholder="Contraseña"

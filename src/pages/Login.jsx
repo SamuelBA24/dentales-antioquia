@@ -1,10 +1,50 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import PasswordInput from '../components/PasswordInput';
+import { useUsersContext } from '../context/usersContext';
+import { useUserContext } from '../context/userContext';
+import { useEffect } from 'react';
 
 const Login = () => {
+	const { users } = useUsersContext();
+	const { user, setUser } = useUserContext();
+	const navigate = useNavigate();
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
+
+		const { email, password } = e.target.elements;
+
+		if (!email.value) {
+			alert('Ingresa un correo electrónico');
+			return;
+		}
+
+		if (!password.value) {
+			alert('Ingresa una contraseña');
+			return;
+		}
+
+		const userFound = users.find(
+			(user) => user.email === email.value && user.password === password.value
+		);
+
+		if (!userFound) {
+			alert('Correo electrónico o contraseña incorrectos');
+		}
+
+		userFound.isActive = true;
+		setUser(userFound);
+
+		alert('Iniciando sesión');
+		return navigate('/catalogo');
 	};
+
+	useEffect(()=>{
+		if(user.isActive){
+			navigate('/catalogo')
+		}
+	},[])
+
 	return (
 		<main className="min-h-screen flex flex-col items-center">
 			<Link to={'/'} className="mt-10">
@@ -48,18 +88,13 @@ const Login = () => {
 						<label htmlFor="password">Contraseña</label>
 						<PasswordInput />
 					</div>
-					{/* <button
+					<button
 						type="submit"
 						className="bg-blue-600 text-white p-2 rounded-lg w-64 mx-auto"
 					>
 						Iniciar sesión
-					</button> */}
-                    <Link
-						to={'/dentales/catalogo'}
-						className="bg-blue-600 text-white p-2 rounded-lg w-64 mx-auto text-center"
-					>
-						Iniciar sesión
-					</Link>
+					</button>
+                    
 				</form>
 				<p>
 					¿No estas registrado?,{' '}
