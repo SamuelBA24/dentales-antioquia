@@ -35,7 +35,7 @@ const Login = () => {
 		userFound.isActive = true;
 		setUser(userFound);
 
-		alert('Iniciando sesión');
+		
 		return navigate('/catalogo');
 	};
 

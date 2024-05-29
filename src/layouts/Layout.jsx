@@ -63,7 +63,7 @@ const Layout = () => {
 			productsSelected: [],
 		});
 
-		alert('Sesión cerrada');
+		
 	};
 
 	return (
