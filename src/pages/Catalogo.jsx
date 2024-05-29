@@ -4,6 +4,7 @@ import { useUserContext } from '../context/userContext';
 const Catalogo = () => {
 	const { user, setUser } = useUserContext();
 
+	
 	const products = [
 		{
 			name: 'Blanqueamiento Dental Perox Carba 1 jer Potenza',

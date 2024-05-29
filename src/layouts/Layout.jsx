@@ -81,7 +81,7 @@ const Layout = () => {
 							<li>
 								<NavLink
 									className={({ isActive }) =>
-										isActive ? 'text-blue-600' : 'text-gray-600 ' + " flex gap-2 items-center"
+										isActive ? 'text-blue-600  flex gap-2 items-center' : 'text-gray-600 ' + " flex gap-2 items-center" 
 									}
 									to={'/carrito'}
 								>
