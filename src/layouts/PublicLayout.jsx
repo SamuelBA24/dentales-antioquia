@@ -1,4 +1,4 @@
-import { Outlet, Link } from 'react-router-dom';
+import { Outlet, NavLink, Link } from 'react-router-dom';
 import icon from '../assets/img/icon.png';
 
 const PublicLayout = () => {
@@ -19,7 +19,7 @@ const PublicLayout = () => {
 
 	return (
 		<main className="min-h-screen bg-slate-100">
-			<nav className="flex flex-wrap  justify-center md:justify-around items-center px-10 ">
+			<nav className="flex flex-wrap justify-center md:justify-between items-center px-10 ">
 				<section className="flex items-center">
 					<Link to={'/'} className="flex items-center">
 						<img src={icon} alt="icon" className="max-w-16 " />
@@ -29,12 +29,14 @@ const PublicLayout = () => {
 				<ul className="flex gap-5">
 					{routes.map((route, index) => (
 						<li key={index}>
-							<Link
+							<NavLink
 								to={route.path}
-								className={`text-slate-900 hover:text-slate-700`}
+								className={({ isActive }) =>
+									isActive ? 'text-blue-600 font-semibold' : 'text-gray-600'
+								}
 							>
 								{route.name}
-							</Link>
+							</NavLink>
 						</li>
 					))}
 				</ul>

@@ -48,12 +48,18 @@ const Login = () => {
 						<label htmlFor="password">Contraseña</label>
 						<PasswordInput />
 					</div>
-					<button
+					{/* <button
 						type="submit"
 						className="bg-blue-600 text-white p-2 rounded-lg w-64 mx-auto"
 					>
 						Iniciar sesión
-					</button>
+					</button> */}
+                    <Link
+						to={'/dentales/catalogo'}
+						className="bg-blue-600 text-white p-2 rounded-lg w-64 mx-auto text-center"
+					>
+						Iniciar sesión
+					</Link>
 				</form>
 				<p>
 					¿No estas registrado?,{' '}
