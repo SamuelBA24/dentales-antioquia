@@ -51,7 +51,7 @@ const Home = () => {
 		},
 	];
 
-	const handleIsOpen = (index) => {
+	const handleToggle = (index) => {
 		setIsOpen((prevState) => ({
 			...prevState,
 			[index]: !prevState[index],
@@ -93,7 +93,7 @@ const Home = () => {
 					>
 						<summary
 							className="h-24 flex items-center justify-between text-gray-700 hover:bg-slate-200"
-							onClick={() => handleIsOpen(index)}
+							onToggle={() => handleToggle(index)}
 						>
 							<h2 className="text-4xl font-bold p-4">{item.title}</h2>
 							{isOpen[index] ? (
