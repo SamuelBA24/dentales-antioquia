@@ -2,6 +2,7 @@ import Product from '../components/Product';
 import { useUserContext } from '../context/userContext';
 
 const Catalogo = () => {
+	const { user, setUser } = useUserContext();
 
 	const products = [
 		{
@@ -11,6 +12,7 @@ const Catalogo = () => {
 			price: '22.750',
 			salePrice: '21.117',
 			link: 'item1.html',
+			quantity: 1,
 		},
 		{
 			name: 'Micromotor Dental 35.000 rpm Fastrong',
@@ -19,6 +21,7 @@ const Catalogo = () => {
 			price: '533.000',
 			salePrice: '485.030',
 			link: '#',
+			quantity: 1,
 		},
 		{
 			name: 'Abrebocas Separador De Carrillo Sencillo',
@@ -27,6 +30,7 @@ const Catalogo = () => {
 			price: '4.433',
 			salePrice: '4.034',
 			link: '#',
+			quantity: 1,
 		},
 		{
 			name: 'Micro aplicadores amarillo 640 x',
@@ -35,6 +39,7 @@ const Catalogo = () => {
 			price: '9.735',
 			salePrice: null,
 			link: '#',
+			quantity: 1,
 		},
 		{
 			name: 'Espejos Faciales',
@@ -43,6 +48,7 @@ const Catalogo = () => {
 			price: '22.000',
 			salePrice: '20.500',
 			link: '#',
+			quantity: 1,
 		},
 		{
 			name: 'Fresa Arkansas Para Pulir Resina X Ud',
@@ -51,6 +57,7 @@ const Catalogo = () => {
 			price: '4.550',
 			salePrice: null,
 			link: '#',
+			quantity: 1,
 		},
 		{
 			name: 'Adhesivo Dental Fix Para Brackets Jga 4 Gr + Acido Maquira',
@@ -59,6 +66,7 @@ const Catalogo = () => {
 			price: '72.147',
 			salePrice: '69.392',
 			link: '#',
+			quantity: 1,
 		},
 		{
 			name: 'Sutura Seda Caja X 12 Sobres',
@@ -67,6 +75,7 @@ const Catalogo = () => {
 			price: '19.854',
 			salePrice: null,
 			link: '#',
+			quantity: 1,
 		},
 	];
 
